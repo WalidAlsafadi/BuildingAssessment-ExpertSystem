@@ -1,27 +1,28 @@
-# Building Assessment Expert System
+# Expert System for Gaza Post-War Building Assessment
 
-This project implements a rule-based expert system to assist in post-war building assessments. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
+This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
 
 ## Features
-- **Rule-Based Inference:** 31 rules to assess building conditions.
-- **Uncertainty Handling:** Confidence levels for rules like cracks and radiation.
-- **Prioritization Mechanism:** Actions are prioritized based on predefined logic.
-- **Robust Testing:** Includes individual rule tests, combined scenarios, and edge cases.
+- **Rule-Based Inference:** Implements 31 rules to assess building conditions based on predefined criteria.
+- **Uncertainty Handling:** Confidence levels for rules like cracks and radiation ensure accurate prioritization.
+- **Prioritization Mechanism:** Outputs are ranked by severity and relevance.
+- **User-Friendly Interface:** A professional Streamlit-based web UI for easy accessibility and decision-making.
+- **Robust Testing:** Includes tests for individual rules, combined scenarios, and edge cases.
 
 ## Project Structure
 - **`src/`**: Contains the main expert system implementation.
-  - `building_assessment_es.py`: Core logic for the rule-based system.
+  - `building_assessment_es.py`: Contains the rule-based logic of the expert system.
+  - `building_assessment_UI.py`: Implements the Streamlit-based user interface for easy input and results visualization.
 - **`test/`**: Includes all test cases and the notebook for validation.
   - `testing.ipynb`: Jupyter Notebook for individual and combined rule testing.
-- **`docs/`**: Project documentation (e.g., PDF report).
-  - `Challenges of Post-War Building Assessment in Gaza and Rule-Based Solutions.pdf` Preliminary report.
-  - `Expert Systems Final Project.pdf` Projects Instructions.
+- **`docs/`**: Project documentation and supporting files.
+  - `Preliminary Report - Challenges of Post-War Building Assessment in Gaza.pdf`: Preliminary report.
+  - `Building Assessment Expert System - Guidelines.pdf`: Project instructions.
 
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone <https://github.com/WalidAlsafadi/BuildingAssessment-ExpertSystem>
    ```
 
 2. Install the required dependencies:
@@ -29,11 +30,19 @@ This project implements a rule-based expert system to assist in post-war buildin
    pip install experta
    ```
 ## Usage
-## Running the Expert System
+### Running the Expert System via the UI
 
-1. Import the system into your Python script:
+1. Launch the Streamlit UI:
    ```bash
-   from src.building_assessment_es import BuildingAssessment, BuildingAssessmentExpertSystem
+   streamlit run src/building_assessment_UI.py
+   ```
+2. Follow the interactive interface to input building conditions and view prioritized actions.
+
+### Running the Expert System via Python
+
+1. Import the system into your script:
+   ```bash
+   from src.building_assessment_ES import BuildingAssessment, BuildingAssessmentExpertSystem
    ```
 2. Define input facts and run the engine:
    ```bash
@@ -45,12 +54,17 @@ This project implements a rule-based expert system to assist in post-war buildin
    ```
 
 ## Testing
-1. Open the Jupyter Notebook in the `testing/` folder:
+1. Open the Jupyter Notebook in the `test` folder:
    ```bash
-   jupyter notebook testing/testing.ipynb
+   jupyter notebook test/testing.ipynb
    ```
 2. Run individual and combined scenario tests.
 3. Validate the outputs in the notebook.
+
+## How It Works
+- The expert system uses a rule-based inference engine with 31 predefined rules.
+- Users input building conditions via the UI, which are converted into facts for the system to process.
+- Based on the rules and priorities, the system provides actionable recommendations.
 
 ## Authors
 - Walid Alsafadi
