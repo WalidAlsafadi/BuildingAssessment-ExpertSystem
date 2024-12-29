@@ -28,7 +28,7 @@ This project requires the following dependencies:
 - **Custom Fork of Experta:** A modified version of the `experta` library to ensure compatibility with Python 3.10+. The fixed version replaces `frozendict` with `immutabledict` and is installed automatically via:
   ```plaintext
   git+https://github.com/WalidAlsafadi/experta.git
-
+  ```
 
 ## Setup Instructions
 1. Clone the repository:
