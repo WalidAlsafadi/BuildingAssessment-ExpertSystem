@@ -11,7 +11,7 @@ This project implements a rule-based expert system to assist engineers in assess
 
 ## Project Structure
 - **`src/`**: Contains the main expert system implementation.
-  - `building_assessment_es.py`: Contains the rule-based logic of the expert system.
+  - `building_assessment_ES.py`: Contains the rule-based logic of the expert system.
   - `building_assessment_UI.py`: Implements the Streamlit-based user interface for easy input and results visualization.
 - **`test/`**: Includes all test cases and the notebook for validation.
   - `testing.ipynb`: Jupyter Notebook for individual and combined rule testing.
