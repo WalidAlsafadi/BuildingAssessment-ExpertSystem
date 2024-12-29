@@ -1,5 +1,7 @@
 # Expert System for Gaza Post-War Building Assessment
 
+[**🌐 Access the Deployed App**](https://building-assessment-es.streamlit.app/)
+
 This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
 
 ## Features
@@ -18,6 +20,15 @@ This project implements a rule-based expert system to assist engineers in assess
 - **`docs/`**: Project documentation and supporting files.
   - `Preliminary Report - Challenges of Post-War Building Assessment in Gaza.pdf`: Preliminary report.
   - `Building Assessment Expert System - Guidelines.pdf`: Project instructions.
+
+## Dependencies
+
+This project requires the following dependencies:
+- **Streamlit:** For building the web-based user interface.
+- **Custom Fork of Experta:** A modified version of the `experta` library to ensure compatibility with Python 3.10+. The fixed version replaces `frozendict` with `immutabledict` and is installed automatically via:
+  ```plaintext
+  git+https://github.com/WalidAlsafadi/experta.git
+
 
 ## Setup Instructions
 1. Clone the repository:
