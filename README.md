@@ -5,7 +5,7 @@
 This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
 
 ## Features
-- **Rule-Based Inference:** Implements 31 rules to assess building conditions based on predefined criteria.
+- **Rule-Based Inference:** Implements 38 rules to assess building conditions based on predefined criteria.
 - **Uncertainty Handling:** Confidence levels for rules like cracks and radiation ensure accurate prioritization.
 - **Prioritization Mechanism:** Outputs are ranked by severity and relevance.
 - **User-Friendly Interface:** A professional Streamlit-based web UI for easy accessibility and decision-making.
@@ -38,7 +38,7 @@ This project requires the following dependencies:
 
 2. Install the required dependencies:
    ```bash
-   pip install experta
+   pip install -r requirements.txt
    ```
 ## Usage
 ### Running the Expert System via the UI
@@ -73,9 +73,19 @@ This project requires the following dependencies:
 3. Validate the outputs in the notebook.
 
 ## How It Works
-- The expert system uses a rule-based inference engine with 31 predefined rules.
+- The expert system uses a rule-based inference engine with 38 predefined rules.
 - Users input building conditions via the UI, which are converted into facts for the system to process.
 - Based on the rules and priorities, the system provides actionable recommendations.
+
+## Future Enhancements and Updates
+As this expert system evolves, future improvements may include:
+
+- **Expanded Rule Set:** Add more granular rules to cover additional factors, such as material composition and advanced structural dynamics.
+- **Machine Learning Integration:** Incorporate machine learning to complement rule-based decisions with predictive analytics.
+- **Mobile Accessibility:** Develop a mobile-friendly version of the UI for use in the field.
+- **Dynamic Data Sources:** Integrate real-time data sources, such as satellite imagery or IoT sensors, for automated fact updates.
+- **Multi-Language Support:** Offer the interface in Arabic and other languages to improve accessibility for local engineers.
+- **Advanced Visualization:** Provide 3D visualizations of damaged structures to aid in assessment.
 
 ## Authors
 - Walid Alsafadi
@@ -85,4 +95,4 @@ This project is licensed under the Apache License. See `LICENSE` for details.
 
 ---
 
-Would you like me to adjust anything else or help with the smaller README for the `testing/` folder? Let me know! 😊
+Let me know if there’s anything else you’d like to modify! 😊

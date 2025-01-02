@@ -77,8 +77,9 @@ PRIORITY_MAP = {
     "Critical: Immediate Repairs Required for Load-Bearing Cracks.": 90,
     "Critical: Immediate Repairs Required for Severe Large Cracks.": 85,
     "Critical: Immediate Water Sanitation Required.": 85,
-    "Critical: Combined impact of hazardous zone and overcrowding.": 90,
+    "Critical: Combined impact of hazardous zone and overcrowding.": 100,
     "Critical: Combined Flood and Water Contamination Risk.": 100,
+    "Critical: Prohibit rebuilding due to radiation and minefields.": 100,
     "Critical: Landslide risk near critical infrastructure.": 100,
     "Critical: Combined risk of high radiation and cracks in hazardous zone.": 100,
     "Critical: Contaminated materials detected, remediation required.": 90,
@@ -87,6 +88,8 @@ PRIORITY_MAP = {
     # High-Priority Actions
     "High Priority: Combined risk of radiation and cracks.": 80,
     "High Priority: Vulnerable population safety.": 80,
+    "High Priority: Restore Utilities for Vulnerable Population.": 85,
+    "High Priority: Deploy Temporary Power Sources for Critical Facilities.": 85,
     "High Priority: Reconstruction due to overcrowding.": 75,
     "High Priority: Temporary housing near urban center for displaced residents.": 75,
     "High Priority: Deploy temporary power sources for critical facilities.": 90,
@@ -123,7 +126,6 @@ PRIORITY_MAP = {
     "Low Priority: No immediate repairs required (Radar stable).": 20,
     "Low Priority: At least one livable property available.": 20,
     "Low Priority: Energy resource allocation not required.": 20,
-    "Low Priority: Monitor Water Supply Status.": 20,
     "Low Priority: Routine Repairs Recommended.": 20,
     "Lower Priority: At least one livable property available.": 20,
 }
@@ -404,7 +406,6 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
         if conf >= 0.8:  # High confidence threshold
             self.declare_action("Critical: Near critical infrastructure (e.g., hospitals, schools).", confidence=conf)
 
-
     @Rule(BuildingAssessment(damaged_utilities=True, utilities_confidence=MATCH.conf))
     def damaged_utilities_with_uncertainty(self, conf):
         if conf is None or not (0.0 <= conf <= 1.0):
@@ -430,19 +431,21 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
         combined_conf = min(radiation_conf, ordnance_conf)
         if radiation > 1.0 and combined_conf >= 0.75:
             self.declare_action("Critical: Prohibit rebuilding due to radiation and minefields.", confidence=combined_conf)
+            for fact in list(self.facts.values()):
+                if isinstance(fact, BuildingAssessment):
+                    # Check specific conditions to identify individual facts to retract
+                    if fact.get("radiation_level", 0) > 2.0 or fact.get("unexploded_ordnance", False):
+                        self.retract(fact)
 
     @Rule(
-            AND(
-                BuildingAssessment(hazardous_zone=True, hazardous_confidence=MATCH.conf),
-                BuildingAssessment(slope_gradient=MATCH.slope),
-                OR(
-                    BuildingAssessment(critical_infrastructure=MATCH.critical_infrastructure),
-                    NOT(Fact(critical_infrastructure=W()))
-                )
-            )
+        AND(
+            BuildingAssessment(hazardous_zone=True, hazardous_confidence=MATCH.conf),
+            BuildingAssessment(slope_gradient=MATCH.slope),
+            BuildingAssessment(critical_infrastructure=MATCH.critical_infrastructure)
         )
-    def landslide_risk_rule(self, conf, slope, critical_infrastructure=None):
-        if conf is None or not (0.0 <= conf <= 1.0):  # Ensure valid confidence
+    )
+    def landslide_risk_rule(self, conf, slope, critical_infrastructure):
+        if conf is None or not (0.0 <= conf <= 1.0):
             conf = 1.0
 
         if slope > 30 and conf >= 0.6:
@@ -497,6 +500,7 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
                     self.retract(fact)
                 except IndexError:
                     pass  # Fact might have already been retracted
+
     @Rule(
             AND(
                 BuildingAssessment(flood_zone_proximity=MATCH.proximity),
@@ -519,7 +523,7 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
     )
     def urban_temporary_shelter(self):
         self.declare_action("High Priority: Temporary housing near urban center for displaced residents.")
-#################
+
     @Rule(
         AND(
             BuildingAssessment(vulnerable_population=True, vulnerable_confidence=MATCH.vulnerable_conf),
@@ -530,40 +534,90 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
         combined_conf = min(vulnerable_conf, utilities_conf)  # Use the lower confidence level
         if combined_conf >= 0.8:  # High confidence threshold
             self.declare_action("High Priority: Restore Utilities for Vulnerable Population.", confidence=combined_conf)
-
-    @Rule(
-            AND(
-                BuildingAssessment(critical_infrastructure=True, infrastructure_confidence=MATCH.conf),
-                NOT(Fact(power_outage_duration=W()))  # Ensure no power outage duration is provided
-            )
-        )
-    def critical_infrastructure_priority(self, conf):
-        if conf is None or not (0.0 <= conf <= 1.0):  # Validate confidence
-            conf = 1.0
-
-        if conf >= 0.8:  # High confidence threshold
-            self.declare_action("Critical: Near critical infrastructure (e.g., hospitals, schools).", confidence=conf)
+            # Suppress individual outputs
+            for fact in list(self.facts.values()):
+                if isinstance(fact, BuildingAssessment):
+                    self.retract(fact)
 
     @Rule(
         AND(
             BuildingAssessment(power_outage_duration=MATCH.duration),
             BuildingAssessment(critical_infrastructure=True)
-        ))
+        )
+    )
     def temporary_power_rule(self, duration):
         if duration > 6:  # High priority for outages exceeding 6 months
             self.declare_action("High Priority: Deploy Temporary Power Sources for Critical Facilities.")
-        elif 6 > duration > 0:  # Moderate priority for shorter outages
+        elif 0 < duration <= 6:  # Moderate priority for shorter outages
             self.declare_action("Moderate: Monitor Power Restoration Timelines.")
+                        # Suppress individual outputs
+        for fact in list(self.facts.values()):
+            if isinstance(fact, BuildingAssessment):
+                self.retract(fact)
 
     @Rule(
-    OR(
-        BuildingAssessment(water_contamination=True),
-        BuildingAssessment(water_access_disrupted=True)
-    ))
-    def water_sanitation_rule(self):
-        if MATCH.water_contamination:
-            MATCH.declare_action("Critical: Immediate Water Sanitation Required.")
-        elif MATCH.water_access_disrupted:
-            self.declare_action("Moderate: Restore Water Supply Access.")
-        else:
-            self.declare_action("Low Priority: Monitor Water Supply Status.")
+        AND(
+            BuildingAssessment(water_contamination=MATCH.water_contamination),
+            BuildingAssessment(water_access_disrupted=MATCH.water_access_disrupted)
+        )
+    )
+    def water_sanitation_rule(self, water_contamination=None, water_access_disrupted=None):
+        if water_contamination and water_access_disrupted:
+            self.declare_action("Critical: Immediate Water Sanitation Required.")
+
+### Zero Confidence Rule ###
+
+    # Environmental Factors
+    hazardous_zone = Field(bool, default=False)  # Is the building in a hazardous zone?
+    hazardous_confidence = Field(float, default=1.0)  # Confidence in hazardous zone assessment (0.0 to 1.0)
+    radiation_level = Field(float, default=0.0)  # Radiation level in material or soil
+    radiation_confidence = Field(float, default=1.0)  # Confidence in radiation measurement (0.0 to 1.0)
+    unexploded_ordnance = Field(bool, default=False)  # Presence of minefields or unexploded ordnance
+    ordnance_confidence = Field(float, default=1.0)  # Confidence in unexploded ordnance detection (0.0 to 1.0)
+    urban_proximity = Field(bool, default=False)  # Close to urban center
+    road_inaccessibility = Field(bool, default=False)  # Roads to the building are inaccessible
+    infrastructure_damaged = Field(bool, default=False)  # Damaged infrastructure near urban center
+    slope_gradient = Field(float, default=0.0)  # Slope gradient in degrees (0 to 90)
+    in_flood_zone = Field(bool, default=False)  # Is the building in a flood zone?
+    flood_confidence = Field(float, default=1.0) # Confidence in flood zone (0.0 to 1.0)
+    seismic_risk = Field(float, default=0.0)  # Peak Ground Acceleration (PGA) in g (0.0 to 1.0)
+    seismic_confidence = Field(float, default=1.0) # Confidence in seismic risk (0.0 to 1.0)
+
+    # Social Factors
+    overcrowding = Field(bool, default=False)  # Is the building overcrowded?
+    overcrowding_confidence = Field(float, default=1.0)  # Confidence in overcrowding assessment (0.0 to 1.0)
+    vulnerable_population = Field(bool, default=False)  # Houses vulnerable groups (e.g., elderly, children)
+    vulnerable_confidence = Field(float, default=1.0)  # Confidence in vulnerable population assessment (0.0 to 1.0)
+    multiple_families = Field(bool, default=False)  # Building serves multiple families
+    income_below_poverty = Field(bool, default=False)  # Owner's income is below the poverty threshold
+    income_confidence = Field(float, default=1.0) # Confidence in Owner's income (0.0 to 1.0)
+    population_displacement = Field(bool, default=False)  # Population displacement exceeding housing capacity
+    temporary_shelter_needed = Field(bool, default=False)  # Displaced residents require temporary housing
+
+    # Utility and Infrastructure
+    damaged_utilities = Field(bool, default=False)  # Damaged sewer or water pipes
+    utilities_confidence = Field(float, default=1.0)  # Confidence in damaged utilities assessment (0.0 to 1.0)
+    access_to_power = Field(bool, default=False)  # Access to power reduces reconstruction priority
+    critical_infrastructure = Field(bool, default=False)  # Is near critical infrastructure
+    infrastructure_confidence = Field(float, default=1.0) # Confidence in critical infrastructure (0.0 to 1.0)
+
+    @Rule(
+        OR(
+            BuildingAssessment(crack_confidence=0.0),
+            BuildingAssessment(load_confidence=0.0),
+            BuildingAssessment(width_confidence=0.0),
+            BuildingAssessment(worsening_confidence=0.0),
+            BuildingAssessment(ordnance_confidence=0.0),
+            BuildingAssessment(flood_confidence=0.0),
+            BuildingAssessment(seismic_confidence=0.0),
+            BuildingAssessment(vulnerable_confidence=0.0),
+            BuildingAssessment(income_confidence=0.0),
+            BuildingAssessment(utilities_confidence=0.0),
+            BuildingAssessment(hazardous_confidence=0.0),
+            BuildingAssessment(radiation_confidence=0.0),
+            BuildingAssessment(infrastructure_confidence=0.0),
+            BuildingAssessment(overcrowding_confidence=0.0)
+        )
+    )
+    def zero_confidence_rule(self):
+        self.declare_action("Recommendation: Further inspection required due to zero confidence.", confidence=0.5)

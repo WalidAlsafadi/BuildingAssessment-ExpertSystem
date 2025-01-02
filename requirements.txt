@@ -1,2 +1,4 @@
 streamlit
+numpy
+skfuzzy
 git+https://github.com/WalidAlsafadi/experta.git
