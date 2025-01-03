@@ -5,11 +5,12 @@
 This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
 
 ## Features
-- **Rule-Based Inference:** Implements 38 rules to assess building conditions based on predefined criteria.
+- **Rule-Based Inference:** Implements 50+ rules to assess building conditions based on predefined criteria.
 - **Uncertainty Handling:** Confidence levels for rules like cracks and radiation ensure accurate prioritization.
 - **Prioritization Mechanism:** Outputs are ranked by severity and relevance.
-- **User-Friendly Interface:** A professional Streamlit-based web UI for easy accessibility and decision-making.
-- **Robust Testing:** Includes tests for individual rules, combined scenarios, and edge cases.
+- **Professional UI:** A polished Streamlit-based web interface with logical grouping, collapsible sections, and integrated social links.
+- **Robust Testing:** Includes tests for individual rules, combined scenarios, and edge cases, with all rules validated.
+- **Future-Proof Design:** Modular structure enables easy updates and expansions.
 
 ## Project Structure
 - **`src/`**: Contains the main expert system implementation.
@@ -33,7 +34,7 @@ This project requires the following dependencies:
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <https://github.com/WalidAlsafadi/BuildingAssessment-ExpertSystem>
+   git clone https://github.com/WalidAlsafadi/BuildingAssessment-ExpertSystem
    ```
 
 2. Install the required dependencies:
