@@ -1,4 +1,4 @@
-streamlit
-numpy
-skfuzzy
+streamlit==1.41.1
+numpy==1.22.4
+skfuzzy==0.4.2
 git+https://github.com/WalidAlsafadi/experta.git
