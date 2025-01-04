@@ -1,5 +1,6 @@
 streamlit==1.41.1
 numpy>=1.23,<1.27
 scikit-fuzzy==0.5.0
+scipy
 setuptools
 git+https://github.com/WalidAlsafadi/experta.git
