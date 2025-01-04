@@ -1,0 +1,39 @@
+1. Finding rules with references.
+2. Deploying a streamlit with original experta
+3. maintaning rules requires many aproches and tests
+4. debbing/testing is diffieclt bcs of we need to check every possible which takes too much time
+5. when I convert some rules to work in fuzzy it makes many errors until it fixes
+
+
+references:
+1. https://nhess.copernicus.org/preprints/2/5501/2014/nhessd-2-5501-2014.pdf
+2. https://www.researchgate.net/profile/Gbenga-Olayanju-2/publication/281372969_Engineering_geophysical_investigation_of_a_flood_zone_A_case_study_of_Alaba_Layout_Akure_Southwestern_Nigeria/links/55e440d208ae6abe6e8ea11a/Engineering-geophysical-investigation-of-a-flood-zone-A-case-study-of-Alaba-Layout-Akure-Southwestern-Nigeria.pdf
+3. https://pubs.usgs.gov/circ/1544/cir1544.pdf
+4. https://www.adb.org/sites/default/files/publication/182652/sdwp-041.pdf
+5. https://d1wqtxts1xzle7.cloudfront.net/42141245/ENHANCING_POST_DISASTER_RECOVERY_BY_OPTIMAL_INFRASTRUCTURE_CAPACITY_BUILDING-libre.pdf?1454677367=&response-content-disposition=inline%3B+filename%3DENHANCING_POST_DISASTER_RECOVERY_BY_OPTI.pdf&Expires=1735562825&Signature=cH0g70typsApnDOaEuLWjcrq~kusNNdcA8-ZWwjL370ACWsiFjO8zj93RmXWjEWQti4hjsRqzmyy~iGV66oAJmUYWc2Py-7XakrJ5e1aRm6gZXK8NWGpERHmcpRlmH6doJptEp-47uragFblCTQmFZyxRtoj4X1evEkz7QxthIr3ercJWxNtWCYfsWCbpH5LHR7sfEyuPw8lHxrFhGVAVBSvVMprTJKJ-2iSM41~uYte5pcIj0zF-rD6gNWIphRlDMZC25XX5ynlnlw7A~zO8f0gREGxgdQHCzdQ010zEKzywnPNMXvwEWXmKE8il-TFlccIBU2zwpiErYiyr~OKFg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+6. https://www.researchgate.net/profile/Jo-Da-Silva-2/publication/265077858_Quality_and_standards_in_post-disaster_shelter/links/571487c008ae4ef74528c44f/Quality-and-standards-in-post-disaster-shelter.pdf
+7. https://www.circleofblue.org/wp-content/uploads/2013/08/Hurricane-Sandy-Rebuilding-Strategy.pdf
+8. https://www.icrp.org/ International Commission on Radiological Protection (ICRP): "ICRP Publication 103: The 2007 Recommendations of the International Commission on Radiological Protection."
+9. https://www.who.int/news-room/fact-sheets/detail/radiation-and-health World Health Organization (WHO): Reports on radiation exposure and health effects.
+
+Landslide-Prone Areas:
+
+NHESS: Landslide Risk Assessment
+Flood Zone Proximity:
+
+Engineering Geophysical Investigation of a Flood Zone
+Seismic Activity Risk:
+
+USGS: Earthquake Hazards
+Certified Materials:
+
+Quality and Standards in Post-Disaster Shelter
+Mandatory Renewable Energy:
+
+ADB: Renewable Energy for Disaster Recovery
+Temporary Power Sources:
+
+Enhancing Post-Disaster Recovery by Optimal Infrastructure Capacity Building
+Water Sanitation:
+
+Hurricane Sandy Rebuilding Strategy
