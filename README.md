@@ -19,8 +19,9 @@ This project implements a rule-based expert system to assist engineers in assess
 - **`test/`**: Includes all test cases and the notebook for validation.
   - `testing.ipynb`: Jupyter Notebook for individual and combined rule testing.
 - **`docs/`**: Project documentation and supporting files.
+  - `Final Report - Rule-Based Expert System for Post-War Building Assessment in Gaza.pdf`: Final report.
   - `Preliminary Report - Challenges of Post-War Building Assessment in Gaza.pdf`: Preliminary report.
-  - `Building Assessment Expert System - Guidelines.pdf`: Project instructions.
+  - `Guidelines - Building Assessment Expert System.pdf`: Project instructions.
 
 ## Dependencies
 
@@ -82,7 +83,7 @@ This project requires the following dependencies:
 3. Validate the outputs in the notebook.
 
 ## How It Works
-- The expert system uses a rule-based inference engine with 38 predefined rules.
+- The expert system uses a rule-based inference engine with 40+ predefined rules.
 - Users input building conditions via the UI, which are converted into facts for the system to process.
 - Based on the rules and priorities, the system provides actionable recommendations.
 
