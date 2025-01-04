@@ -5,12 +5,12 @@
 This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
 
 ## Features
-- **Rule-Based Inference:** Implements 50+ rules to assess building conditions based on predefined criteria.
+- **Rule-Based Inference:** Implements **40+ rules** to assess building conditions based on predefined criteria.
 - **Uncertainty Handling:** Confidence levels for rules like cracks and radiation ensure accurate prioritization.
 - **Prioritization Mechanism:** Outputs are ranked by severity and relevance.
-- **Professional UI:** A polished Streamlit-based web interface with logical grouping, collapsible sections, and integrated social links.
+- **Professional UI:** A polished Streamlit-based web interface with logical grouping, dynamic inputs, and integrated social links.
 - **Robust Testing:** Includes tests for individual rules, combined scenarios, and edge cases, with all rules validated.
-- **Future-Proof Design:** Modular structure enables easy updates and expansions.
+- **Successful Deployment:** The app is fully deployed and accessible online.
 
 ## Project Structure
 - **`src/`**: Contains the main expert system implementation.
@@ -26,6 +26,9 @@ This project implements a rule-based expert system to assist engineers in assess
 
 This project requires the following dependencies:
 - **Streamlit:** For building the web-based user interface.
+- **NumPy:** Numerical computations.
+- **SciPy:** Used by scikit-fuzzy for advanced computations.
+- **Scikit-Fuzzy:** For fuzzy logic computations.
 - **Custom Fork of Experta:** A modified version of the `experta` library to ensure compatibility with Python 3.10+. The fixed version replaces `frozendict` with `immutabledict` and is installed automatically via:
   ```plaintext
   git+https://github.com/WalidAlsafadi/experta.git
@@ -37,7 +40,12 @@ This project requires the following dependencies:
    git clone https://github.com/WalidAlsafadi/BuildingAssessment-ExpertSystem
    ```
 
-2. Install the required dependencies:
+2. Navigate to the project directory:
+   ```bash
+   cd BuildingAssessment-ExpertSystem
+   ```
+
+3. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
