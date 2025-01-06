@@ -22,6 +22,7 @@ This project implements a rule-based expert system to assist engineers in assess
   - `Final Report - Rule-Based Expert System for Post-War Building Assessment in Gaza.pdf`: Final report.
   - `Preliminary Report - Challenges of Post-War Building Assessment in Gaza.pdf`: Preliminary report.
   - `Guidelines - Building Assessment Expert System.pdf`: Project instructions.
+  - `Presentation - Rule-Based Expert System for Post-War Building Assessment in Gaza`: PowerPoint Presentation.
 
 ## Dependencies
 
@@ -90,12 +91,11 @@ This project requires the following dependencies:
 ## Future Enhancements and Updates
 As this expert system evolves, future improvements may include:
 
-- **Expanded Rule Set:** Add more granular rules to cover additional factors, such as material composition and advanced structural dynamics.
-- **Machine Learning Integration:** Incorporate machine learning to complement rule-based decisions with predictive analytics.
-- **Mobile Accessibility:** Develop a mobile-friendly version of the UI for use in the field.
-- **Dynamic Data Sources:** Integrate real-time data sources, such as satellite imagery or IoT sensors, for automated fact updates.
-- **Multi-Language Support:** Offer the interface in Arabic and other languages to improve accessibility for local engineers.
-- **Advanced Visualization:** Provide 3D visualizations of damaged structures to aid in assessment.
+- **Expand Rule Base**: Add new rules to address additional scenarios and challenges in post-conflict zones.
+- **Predictive Models**: Integrate machine learning to predict building damage or prioritize reconstruction based on historical data.
+- **Advanced User Experience**: Enhance the Streamlit UI for even more seamless interaction, ensuring compatibility across all devices, including mobile.
+- **Localization**: Incorporate multi-language support for broader accessibility, especially for local stakeholders in Gaza.
+- **Real-Time Data Integration**: Enable the system to pull real-time data, such as updated satellite imagery and weather conditions, to refine assessments.
 
 ## Authors
 - Walid Alsafadi
