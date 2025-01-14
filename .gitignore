@@ -1,0 +1,15 @@
+# Ignore video files
+*.mkv
+
+# Ignore Word documents
+*.docx
+
+# Ignore Python cache directories
+__pycache__/
+*.pyc
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore JSON files
+*.json

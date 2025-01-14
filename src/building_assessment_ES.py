@@ -144,7 +144,7 @@ CRACK_SEVERITY_MAP = {
 class BuildingAssessmentExpertSystem(KnowledgeEngine):
     """
     Rule-based expert system for evaluating building conditions using fuzzy logic
-    and prioritizing actions based on confidence values.
+    and prioritizing actions based on confidence values. Includes backward chaining.
     """
 
     def __init__(self):
@@ -230,9 +230,62 @@ class BuildingAssessmentExpertSystem(KnowledgeEngine):
 
     def validate_confidence(self, conf):
         """
-        Validate confidence if 
+        Validates the confidence value provided for a rule or fact.
+
+        Args:
+            conf (float or None): The confidence value to validate, expected to be between 0.0 and 1.0.
+
+        Returns:
+            float: The validated confidence value. If the input is None or out of range, defaults to 1.0.
         """
         return conf if conf is not None and 0.0 <= conf <= 1.0 else 1.0
+
+    def backward_chain(self, goal_action):
+        """
+        Perform backward chaining to achieve a goal action.
+
+        Args:
+            goal_action (str): The desired action to achieve.
+
+        Returns:
+            bool: True if the goal action is achieved, False otherwise.
+        """
+        for rule in self.rules:
+            if rule['action'] == goal_action:
+                # Evaluate conditions of the rule
+                for condition in rule['conditions']:
+                    if not self.evaluate_condition(condition):
+                        print(f"Condition '{condition}' for goal '{goal_action}' not satisfied.")
+                        return False
+                print(f"Goal '{goal_action}' achieved via rule: {rule['name']}")
+                return True
+        print(f"Goal '{goal_action}' could not be achieved.")
+        return False
+
+    def evaluate_condition(self, condition):
+        """
+        Evaluate a single condition. If the condition is not a fact, recursively check subgoals.
+
+        Args:
+            condition (str): The condition to evaluate.
+
+        Returns:
+            bool: True if the condition is satisfied, False otherwise.
+        """
+        # Check if the condition exists in facts
+        if condition in self.facts:
+            return self.facts[condition]
+
+        # Check if the condition is derived from another rule
+        for rule in self.rules:
+            if condition in rule['action']:
+                print(f"Evaluating subgoal: {condition}")
+                return self.backward_chain(rule['action'])
+
+        # If the condition is not resolved, check the default "facts" dictionary
+        print(f"Condition '{condition}' not explicitly provided. Checking default responses.")
+        return self.default_facts.get(condition, False)
+
 
     ### Structural Damage Assessment Rules ###
 
