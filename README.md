@@ -2,36 +2,40 @@
 
 [**🌐 Access the Deployed App**](https://building-assessment-es.streamlit.app/)
 
-This project implements a rule-based expert system to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various structural, environmental, social, and utility-related factors to prioritize actions for reconstruction, repair, or temporary solutions.
+This project implements a **rule-based expert system** to assist engineers in assessing post-war building conditions in Gaza. The system evaluates various **structural, environmental, social, and utility-related factors** to prioritize actions for reconstruction, repair, or temporary solutions.
+
+---
 
 ## Features
-- **Rule-Based Inference:** Implements **40+ rules** to assess building conditions based on predefined criteria.
-- **Uncertainty Handling:** Confidence levels for rules like cracks and radiation ensure accurate prioritization.
-- **Prioritization Mechanism:** Outputs are ranked by severity and relevance.
-- **Professional UI:** A polished Streamlit-based web interface with logical grouping, dynamic inputs, and integrated social links.
-- **Robust Testing:** Includes tests for individual rules, combined scenarios, and edge cases, with all rules validated.
-- **Successful Deployment:** The app is fully deployed and accessible online.
+- **Rule-Based Inference**: Implements **40+ rules** to assess building conditions based on predefined criteria.
+- **Uncertainty Handling**: Uses **fuzzy logic**, **confidence levels**, and **priority ranking** for accurate recommendations.
+- **Prioritization Mechanism**: Outputs are ranked by severity and relevance.
+- **Professional UI**: A polished **Streamlit-based web interface** with logical grouping, dynamic inputs, and integrated social links.
+- **Robust Testing**: Includes tests for individual rules, combined scenarios, and edge cases, ensuring rule validation.
+- **Successful Deployment**: Fully deployed and accessible online.
+
+---
 
 ## Project Structure
 - **`src/`**: Contains the main expert system implementation.
-  - `building_assessment_ES.py`: Contains the rule-based logic of the expert system.
-  - `building_assessment_UI.py`: Implements the Streamlit-based user interface for easy input and results visualization.
-- **`test/`**: Includes all test cases and the notebook for validation.
+  - `building_assessment_ES.py`: Implements rule-based logic for building assessment.
+  - `building_assessment_UI.py`: Streamlit-based user interface for user interaction and result visualization.
+- **`test/`**: Includes test cases and a validation notebook.
   - `testing.ipynb`: Jupyter Notebook for individual and combined rule testing.
 - **`docs/`**: Project documentation and supporting files.
-  - `Final Report - Rule-Based Expert System for Post-War Building Assessment in Gaza.pdf`: Final report.
-  - `Preliminary Report - Challenges of Post-War Building Assessment in Gaza.pdf`: Preliminary report.
-  - `Guidelines - Building Assessment Expert System.pdf`: Project instructions.
-  - `Presentation - Rule-Based Expert System for Post-War Building Assessment in Gaza`: PowerPoint Presentation.
+  - `Final Report - A Rule-Based Expert System for Post-War Building Assessment in Gaza (2025).pdf`: Final report detailing the system and its development.
+  - `Presentation - Rule-Based Expert System for Post-War Building Assessment in Gaza`: PowerPoint presentation summarizing the project.
+
+---
 
 ## Dependencies
 
 This project requires the following dependencies:
-- **Streamlit:** For building the web-based user interface.
-- **NumPy:** Numerical computations.
-- **SciPy:** Used by scikit-fuzzy for advanced computations.
-- **Scikit-Fuzzy:** For fuzzy logic computations.
-- **Custom Fork of Experta:** A modified version of the `experta` library to ensure compatibility with Python 3.10+. The fixed version replaces `frozendict` with `immutabledict` and is installed automatically via:
+- **Streamlit**: For building the user interface.
+- **NumPy**: Numerical computations.
+- **SciPy**: Used by scikit-fuzzy for advanced computations.
+- **Scikit-Fuzzy**: For fuzzy logic implementation.
+- **Custom Fork of Experta**: A modified version of the `experta` library compatible with Python 3.10+. Install via:
   ```plaintext
   git+https://github.com/WalidAlsafadi/experta.git
   ```
@@ -84,18 +88,17 @@ This project requires the following dependencies:
 3. Validate the outputs in the notebook.
 
 ## How It Works
-- The expert system uses a rule-based inference engine with 40+ predefined rules.
-- Users input building conditions via the UI, which are converted into facts for the system to process.
-- Based on the rules and priorities, the system provides actionable recommendations.
+- The system uses rule-based inference with 40+ predefined rules to assess building conditions.
+- Users input building conditions through a user-friendly UI.
+- The system processes these inputs and provides actionable recommendations based on priority and confidence.
 
 ## Future Enhancements and Updates
 As this expert system evolves, future improvements may include:
 
-- **Expand Rule Base**: Add new rules to address additional scenarios and challenges in post-conflict zones.
-- **Predictive Models**: Integrate machine learning to predict building damage or prioritize reconstruction based on historical data.
-- **Advanced User Experience**: Enhance the Streamlit UI for even more seamless interaction, ensuring compatibility across all devices, including mobile.
-- **Localization**: Incorporate multi-language support for broader accessibility, especially for local stakeholders in Gaza.
-- **Real-Time Data Integration**: Enable the system to pull real-time data, such as updated satellite imagery and weather conditions, to refine assessments.
+- **Expanded Rule Base**: Adding new rules to address emerging challenges in post-conflict zones.
+- **Machine Learning Integration**: Predict building damage or prioritize reconstruction based on historical data.
+- **Enhanced User Experience**: Improving the UI for better usability and multi-language support.
+- **Real-Time Data**: Integration of real-time data (e.g., satellite imagery) for more precise assessments.
 
 ## Authors
 - Walid Alsafadi
@@ -105,4 +108,4 @@ This project is licensed under the Apache License. See `LICENSE` for details.
 
 ---
 
-Let me know if there’s anything else you’d like to modify! 😊
+Let me know if further refinements are needed! 😊
